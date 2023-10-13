@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
-description: "My final project"
+author: Austen Wyche
+description: Final Project for GOV50
 output:
   distill::distill_article:
     self_contained: false
@@ -11,4 +11,9 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring data related to the connection between a voters' claim they would like to see Republicans or Democrats in Congress, and how that translates into actual election results. While the majority of voters may claim they would prefer Democrats in control of the House or Senate, will this actually hold to be true in the results? I would like to explore this question to view the connection between self-proclaimed opinions and voting behavior. 
+
+## Milestone 2
+
+Does voters' proclaimed party control preference truly impact their voting behavior? In this study, I plan to examine the relationship between polls asking voters their preference of whether Democrats or Republicans control Congress and the results of the 2022 federal elections. I hypothesize that alleged party preference has no strong relationship with the party that wins the election. In an increasing time of unpredictable elections, I believe it is difficult to gauge the true party preference held by most members of the population. While polling is generally a reliable method to assess public opinion, many Americans are not represented in this system; this leads to upsets and unanticipated results. The explanatory variable of interest will be data collected by FiveThirtyEight on the party preference of voters regarding control of the United States Senate and House of Representatives. FiveThirtyEight collects this data months leading up to the election, so there is variability in party preference among voters. The outcome variable of interest are the results from the the 2022 House of Representatives Elections, where Republicans regained control of the lower chamber by a narrow margin. A positive correlation between the percentage of voters preferring Democrats control Congress and Republicans winning control would prove my hypothesis, while a pattern of preferred Republican control and Republicans ending victorious would disprove my hypothesis..
+
