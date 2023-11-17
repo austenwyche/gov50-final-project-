@@ -4,73 +4,84 @@ author: Austen Wyche
 description: Final Project for GOV50
 output:
   distill::distill_article:
-    self_contained: false
 ---
 
 
 
 ## Project thoughts
 
-I am interested in exploring data related to the connection between a voters' claim they would like to see Republicans or Democrats in Congress, and how that translates into actual election results. While the majority of voters may claim they would prefer Democrats in control of the House or Senate, will this actually hold to be true in the results? I would like to explore this question to view the connection between self-proclaimed opinions and voting behavior. 
+I am interested in exploring data related to the relationship between gun ownership rates in the United States and the frequency of mass shootings. Does increased gun ownership have a positive relationship with the frequency of mass shootings, or is there no relationship between the two?
 
 ## Milestone 2
 
-Does voters' proclaimed party control preference truly impact their voting behavior? In this study, I plan to examine the relationship between polls asking voters their preference of whether Democrats or Republicans control Congress and the results of the 2022 federal elections. I hypothesize that alleged party preference has no strong relationship with the party that wins the election. In an increasing time of unpredictable elections, I believe it is difficult to gauge the true party preference held by most members of the population. While polling is generally a reliable method to assess public opinion, many Americans are not represented in this system; this leads to upsets and unanticipated results. The explanatory variable of interest will be data collected by FiveThirtyEight on the party preference of voters regarding control of the United States Senate and House of Representatives. FiveThirtyEight collects this data months leading up to the election, so there is variability in party preference among voters. The outcome variable of interest are the results from the the 2022 House of Representatives Elections (by MIT Election Data and Science Labs), where Republicans regained control of the lower chamber by a narrow margin. A positive correlation between the percentage of voters preferring Democrats control Congress and Republicans winning control would prove my hypothesis, while a pattern of preferred Republican control and Republicans ending victorious would disprove my hypothesis.
+Do gun ownership rates correlate with the number of mass shootings in the United States? In this study, I plan to analyze the relationship between self-proclaimed Gun Ownership in Gallup polling and the occurance of mass shootings (defined by a shooting where at least three deaths occur). I hypothesize there is likely no relationship between gun ownership rates and mass shootings. I expect that the rate of gun ownership in the United States has remained stable, while the rate of mass shootings has likely increased over the past couple of decades. My unit of analysis is the United States over the period 1980-2017. The explanatory variable of interest is the gun ownership rate, measured by public policy polling. The outcome variable is the number of mass shootings in the United States. The outcome variable of interest is measured by Mother Jones, a nonprofit organization which compiled records of mass shootings in the United States since the year 2000. A pattern that displays little to no correlation between gun ownership rates and mass shootings in the United States would confirm my hypothesis. 
 
-## Final Project Milestone 3
+## Milestone 3
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
-library(infer)
 library(gov50data)
+library(infer)
+library(dbplyr)
+gun_death_data <- read.csv("massshootings.csv")
 ```
 
 ```{r}
-data_1 <- read.csv("generic_ballot_averages.csv")|>
-  filter(cycle == 2022)
-data_1
-View(data_1)
-```
+library(dplyr)
+library(ggplot2)
 
-```{r}
-data_1_graph <- data_1|>
-  group_by(candidate)|>
-  summarise(mean_percentage = mean(pct_estimate))|>
-  ggplot(mapping = aes(x = candidate, y = mean_percentage, color = candidate))+
-  geom_col()+
-  labs(x = "Party", y = "Mean Percentage of the Vote across 2022 election cycle", title = "Percentage of the vote in 2022 election (by party)")
-data_1_graph
-```
+gun_deaths_by_year <- gun_death_data|>
+  group_by(Year)|>
+  summarize(n = n())
 
-```{r}
-data_2 <- read.csv("1976-2022-house.csv")|>
-  filter(year == 2022)|>
-  filter(party == "REPUBLICAN" | party == "DEMOCRAT")
-data_2
-```
-
-```{r}
-data_2_graph <- data_2|>
-  group_by(party)|>
-  summarize(sum_votes = sum(candidatevotes))
-data_2_graph
+gun_plot <- gun_deaths_by_year %>%
+  ggplot(mapping = aes(x = Year, y = n)) +
+  geom_bar(stat = "identity")+
+  labs(title = "Number of Mass Shootings from 1980 to 2017", x = "Year", y = "Number of Mass Shootings")
+gun_plot
 
 ```
+
 
 ```{r}
 library(tidyverse)
+library(ggplot2)
 library(gov50data)
-scatterplot1 <- data_1|>
-  group_by(candidate, date)|>
-  ggplot(mapping = aes(x = date, y = pct_estimate, color = candidate))+
-  geom_point(alpha = .25)+
-  labs(y = "Estimated Vote Percentage in 2022 Election", x = "Date of Poll Taken", title = "Estimated Vote Percentage in 2022 Election Polls")
-scatterplot1
+library(infer)
+library(dbplyr)
+
+gun_ownership_data = read_csv("gunownership.csv")
+gun_ownership_data
+
+gun_ownership_data|>
+  select(Year, OwnGuns)|>
+  ggplot(mapping = aes(x = Year, y = OwnGuns))+
+  geom_col()+
+  labs(title = "Gallup Gun Ownership Rate in the United States from 2000-2018", x = "Years", y = "Gun Ownership Rate(%)")
 ```
 
 
-## Final Project Milestone #4
+## Milestone 4
 
+```{r}
+merged_data <- gun_death_data|>
+  inner_join(gun_ownership_data, by = "Year")|>
+  select(OwnGuns, Total.victims, Fatalities, Year)
+```
 
+```{r}
+gun_ownership_data
+fit <- lm(data= gun_ownership_data, OwnGuns~Year)|>
+  broom::tidy()|>
+  select(term, est=estimate, se=std.error, pval = p.value)
+
+knitr::kable(fit, digits = 3, col.names = c("Variable", "Coefficient Estimate", "Standard Error", "P Value"))
+
+ggplot(data= gun_ownership_data, aes(x= Year, y = OwnGuns))+
+  geom_col()+
+  geom_smooth(method="lm")
+```
+
+My linear regression can be interpreted as meaning for every one unit increase (year), there is an increase in the gun ownership rate by an average .26 percentage points. As the p value is under .01, it can be seen as statistically significant. Lastly, the intercept should not be interpreted causally as it begins at Year Zero, when guns were not yet invented. 
 
