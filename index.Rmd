@@ -20,21 +20,57 @@ Does voters' proclaimed party control preference truly impact their voting behav
 ## Final Project Milestone 3
 
 ```{r}
-data <- read.csv("generic_ballot_averages.csv")
+library(tidyverse)
+library(ggplot2)
+library(infer)
+library(gov50data)
 ```
 
 ```{r}
-data_2 <- read.csv("1976-2022-house.csv")
+data_1 <- read.csv("generic_ballot_averages.csv")|>
+  filter(cycle == 2022)
+data_1
+View(data_1)
 ```
 
+```{r}
+data_1_graph <- data_1|>
+  group_by(candidate)|>
+  summarise(mean_percentage = mean(pct_estimate))|>
+  ggplot(mapping = aes(x = candidate, y = mean_percentage, color = candidate))+
+  geom_col()+
+  labs(x = "Party", y = "Mean Percentage of the Vote across 2022 election cycle", title = "Percentage of the vote in 2022 election (by party)")
+data_1_graph
+```
+
+```{r}
+data_2 <- read.csv("1976-2022-house.csv")|>
+  filter(year == 2022)|>
+  filter(party == "REPUBLICAN" | party == "DEMOCRAT")
+data_2
+```
+
+```{r}
+data_2_graph <- data_2|>
+  group_by(party)|>
+  summarize(sum_votes = sum(candidatevotes))
+data_2_graph
+
+```
 
 ```{r}
 library(tidyverse)
 library(gov50data)
-scatterplot1 <- data|>
+scatterplot1 <- data_1|>
   group_by(candidate, date)|>
   ggplot(mapping = aes(x = date, y = pct_estimate, color = candidate))+
   geom_point(alpha = .25)+
   labs(y = "Estimated Vote Percentage in 2022 Election", x = "Date of Poll Taken", title = "Estimated Vote Percentage in 2022 Election Polls")
 scatterplot1
 ```
+
+
+## Final Project Milestone #4
+
+
+
