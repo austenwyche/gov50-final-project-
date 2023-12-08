@@ -1,7 +1,7 @@
 ---
-title: "Gov 50 Final Project"
+title: "Final Project"
 author: Austen Wyche
-description: Final Project for GOV50
+description: GOV50 Final Project
 output:
   distill::distill_article:
 ---
@@ -24,7 +24,9 @@ library(ggplot2)
 library(gov50data)
 library(infer)
 library(dbplyr)
-gun_death_data <- read.csv("massshootings.csv")
+gun_death_data <- read.csv("massshootings.csv")|>
+  filter(Year >= 2000 & Year <= 2017)
+
 ```
 
 ```{r}
@@ -84,4 +86,87 @@ ggplot(data= gun_ownership_data, aes(x= Year, y = OwnGuns))+
 ```
 
 My linear regression can be interpreted as meaning for every one unit increase (year), there is an increase in the gun ownership rate by an average .26 percentage points. As the p value is under .01, it can be seen as statistically significant. Lastly, the intercept should not be interpreted causally as it begins at Year Zero, when guns were not yet invented. 
+
+## Final Project  
+By: M. Austen Wyche
+
+## Introduction
+
+The main research question is: What is the relationship between gun ownership rates and the number of mass shootings (per year) in the United States? My main hypothesis is that in years with higher gun ownership, there will be a larger number of mass shootings taking place. This is important to discover whether there is a correlation between allowing more people to own guns and more instances of violence. 
+
+In the United States, there is major debate over whether the gun ownership rate makes Americans safer or more vulnerable to danger. By analyzing the relationship between gun ownership and mass shootings, I hope to discover whether there is a relationship between the two. 
+
+## Data Section
+
+The main outcome of interest is the number of mass shootings in the United States per year. The outcome variable of interest is measured by Mother Jones, a nonprofit organization which compiled records of mass shootings in the United States since the year 2000. 
+
+As we can see below, the number of mass shootings in the United States has increased in frequency over the last four decades. One limitation of this data is the fact that some acts of gun violence (i.e. when there are only two victims) are not classified as mass shootings despite the weapon being a firearm. While this is a limitation of the data, the plot by Mother Jones data displays the number of mass shootings (defined as 3 or more killings in a single incident by United States statutes).
+
+```{r, echo=FALSE}
+library(dplyr)
+library(ggplot2)
+
+gun_deaths_by_year <- gun_death_data|>
+  group_by(Year)|>
+  summarize(num_deaths = n())
+
+gun_plot <- gun_deaths_by_year %>%
+  ggplot(mapping = aes(x = Year, y = num_deaths)) +
+  geom_bar(stat = "identity")+
+  labs(title = "Number of Mass Shootings from 1980 to 2017", x = "Year", y = "Number of Mass Shootings")
+gun_plot
+
+```
+
+## Results Section
+
+As we can see below, Gallup has compiled the self-reported gun ownership rate in the United States between 2000-2018. 
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(gov50data)
+library(infer)
+library(dbplyr)
+
+gun_ownership_data = read_csv("gunownership.csv")
+gun_ownership_data
+
+gun_ownership_data|>
+  select(Year, OwnGuns)|>
+  ggplot(mapping = aes(x = Year, y = OwnGuns))+
+  geom_col()+
+  labs(title = "Gallup Gun Ownership Rate in the United States from 2000-2018", x = "Years", y = "Gun Ownership Rate(%)")
+```
+
+Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances)
+
+```{r, echo= FALSE}
+merged_data_2 <- gun_deaths_by_year|>
+  inner_join(gun_ownership_data, by = "Year")
+merged_data_2
+
+library(tidyverse)
+library(ggplot2)
+library(gov50data)
+library(infer)
+library(dbplyr)
+
+merged_information <- merged_data_2 |>
+  ggplot(mapping = aes(x = Year))+
+  geom_line(aes(y = num_deaths))+
+  geom_line(aes(y = OwnGuns))+
+  labs(title = "Relationship between Gun Ownership Rate and Number of Mass Shootings", x = "Year", y = "Number of Mass Shootings/Percentage Gun Ownership")
+merged_information
+```
+
+Regression of Gun Ownership Rate and Instances of Mass Shootings 
+
+```{r, echo=FALSE}
+fit_1 <- lm(data= merged_data_2, num_deaths ~ OwnGuns)|>
+  broom::tidy()|>
+  select(term, est=estimate, se=std.error, pval = p.value)
+fit_1
+
+```
 
