@@ -19,7 +19,7 @@ As we can see below, the number of mass shootings in the United States has incre
 
 The main outcome variable of interest is the number of mass shooring instances, which is seen in the graph below. 
 
-```{r, include=FALSE}
+```{r}
 
 library(tidyverse)
 library(ggplot2)
@@ -31,7 +31,7 @@ gun_death_data <- read.csv("massshootings.csv")|>
   filter(Year >= 2000 & Year <= 2017)
 
 gun_ownership_data = read_csv("gunownership.csv")
-gun_ownership_data
+
 
 merged_data <- gun_death_data|>
   inner_join(gun_ownership_data, by = "Year")|>
@@ -42,32 +42,19 @@ gun_deaths_by_year <- gun_death_data|>
   summarize(num_deaths = n())
 ```
 
-```{r, echo=FALSE}
-
+```{r}
 gun_plot <- gun_deaths_by_year %>%
   ggplot(mapping = aes(x = Year, y = num_deaths)) +
   geom_bar(stat = "identity")+
   labs(title = "Number of Mass Shootings from 1980 to 2017", x = "Year", y = "Number of Mass Shootings")
 gun_plot
-
 ```
 
 ## Results Section
 
 As we can see below, Gallup has compiled the self-reported gun ownership rate in the United States between 2000-2018. It appears the gun ownership rate in the United States has remained relatively stable, but increased gradually, between 40% and 50% in the period of 2000-2018.
 
-```{r, include=FALSE}
-library(tidyverse)
-library(ggplot2)
-library(gov50data)
-library(infer)
-library(dbplyr)
-
-gun_ownership_data = read_csv("gunownership.csv")
-gun_ownership_data
-```
-
-```{r, echo=FALSE}
+```{r}
 gun_ownership_data|>
   select(Year, OwnGuns)|>
   ggplot(mapping = aes(x = Year, y = OwnGuns))+
@@ -79,19 +66,13 @@ Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting In
 
 The following graph displays a linegraph of the gun ownership rate and the number of mass shooting instances. The top line represents the gun ownership rate, which remained between 40% and 50% over this period, but increased overall. The bottom line represents the number of mass shooting instances documented by Mother Jones, which has increased over this period of time to nearly 10 documented instances per year.
 
-```{r, include= FALSE}
+```{r}
 merged_data_2 <- gun_deaths_by_year|>
   inner_join(gun_ownership_data, by = "Year")
 merged_data_2
-
-library(tidyverse)
-library(ggplot2)
-library(gov50data)
-library(infer)
-library(dbplyr)
 ```
 
-```{r, echo=FALSE}
+```{r}
 merged_information <- merged_data_2 |>
   ggplot(mapping = aes(x = Year))+
   geom_line(aes(y = num_deaths))+
@@ -121,16 +102,10 @@ modelsummary::modelsummary(fit_1,
 
 
 
-As we interpret this correlation, it appears that when the gun ownership rate is zero, the number of anticipated deaths is -34.96. This should not be interpreted in a causal manner as it is not possible to have a negative gun ownership rate or a negative number of deaths. 
+As we interpret this correlation, it appears that when the gun ownership rate is zero, the number of anticipated deaths is -34.96. This should not be interpreted in a causal manner as it is not possible to have a negative gun ownership rate or a negative number of deaths. Furthermore, the correlation displays that for every one unit (one percent) increase in the gun ownership rate, there appears to be a .8890 increase in the number of mass shooting instances. Due to this relationship, it is likely we can conclude the gun ownership rate in the United States has a positive relationship with the number of mass shooting instances. 
 
 
-Furthermore, the correlation displays that for every one unit (one percent) increase in the gun ownership rate, there appears to be a .8890 increase in the number of mass shooting instances. Due to this relationship, it is likely we can conclude the gun ownership rate in the United States has a positive relationship with the number of mass shooting instances. 
-
-
-Due to the p value of OwnGuns (.003) being less than .05, we can reject the null hypothesis that there is no relationship between the gun ownership rate and the number of mass shooting instances in the United States. Therefore, there appears to be a statistically significant relationship between the two. 
-
-
-While this correlation implies there is a statistically significant relationship between the gun ownership rate in the United States and the number of mass shootings, we should continue to acknowledge the number of mass shootings is likely higher than reported by Mother Jones. 
+Due to the p value of OwnGuns (.003) being less than .05, we can reject the null hypothesis that there is no relationship between the gun ownership rate and the number of mass shooting instances in the United States. Therefore, there appears to be a statistically significant relationship between the two. While this correlation implies there is a statistically significant relationship between the gun ownership rate in the United States and the number of mass shootings, we should continue to acknowledge the number of mass shootings is likely higher than reported by Mother Jones. 
 
 
 ## Conclusion
