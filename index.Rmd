@@ -102,16 +102,22 @@ Regression of Gun Ownership Rate and Instances of Mass Shootings
 
 ```{r, include= FALSE}
 library(modelsummary)
+library(tinytex)
 ```
 
 ```{r, echo=FALSE}
-fit_1 <- lm(data= merged_data_2, num_deaths ~ OwnGuns)|>
-  broom::tidy()|>
-  select(term, est=estimate, se=std.error, pval = p.value)
+fit_1 <- lm(data= merged_data_2, num_deaths ~ OwnGuns)
 fit_1
 
-knitr::kable(fit_1, col.names = c("Term", "Estimate", "Standard Error", "P-Value"))
+## knitr::kable(fit_1, col.names = c("Term", "Estimate", "Standard Error", "P-Value"))
+modelsummary::modelsummary(fit_1,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
+
+
+
 
 As we interpret this correlation, it appears that when the gun ownership rate is zero, the number of anticipated deaths is -34.96. This should not be interpreted in causal manner as it is not possible to have a negative gun ownership rate or a negative number of deaths. 
 
@@ -128,3 +134,5 @@ Overall, it appears there is statistically significant for the hypothesis that i
 In addition, a major confounding variable not accounted for in this study are gun control laws. As the United States has state-by-state policy on guns, the strict/lenient nature of a states' gun laws affects both the gun ownership rate and the number of mass shooting instances. This factor has the ability to affect both the response and explanatory variable. 
 
 If there was more time and financial resources to create this study, I would personally document the instances of mass shootings in order to ensure the number is accurate. In addition, as this study only runs up to 2018, it would be interesting to see the trend in the years up to 2023, when mass shootings have significantly risen in the United States. 
+
+Lastly, it would be interesting to explore if the outcome variable was number of victims rather than mass shooting instances. Instances of mass shootings (say 10 in 2018), conceals the magnitude of these incidents by the number of fatalities. With more time and resources, I would explore the impact of gun ownership rates on this variable. 
