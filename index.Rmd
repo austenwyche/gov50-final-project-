@@ -20,7 +20,6 @@ As we can see below, the number of mass shootings in the United States has incre
 The main outcome variable of interest is the number of mass shooring instances, which is seen in the graph below. 
 
 ```{r}
-
 library(tidyverse)
 library(ggplot2)
 library(gov50data)
@@ -31,11 +30,6 @@ gun_death_data <- read.csv("massshootings.csv")|>
   filter(Year >= 2000 & Year <= 2018)
 
 gun_ownership_data = read_csv("gunownership.csv")
-
-
-merged_data <- gun_death_data|>
-  inner_join(gun_ownership_data, by = "Year")|>
-  select(OwnGuns, Total.victims, Fatalities, Year)
 
 gun_deaths_by_year <- gun_death_data|>
   group_by(Year)|>

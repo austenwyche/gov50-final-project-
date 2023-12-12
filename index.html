@@ -646,11 +646,7 @@ gun_ownership_data = read_csv(&quot;gunownership.csv&quot;)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>merged_data &lt;- gun_death_data|&gt;
-  inner_join(gun_ownership_data, by = &quot;Year&quot;)|&gt;
-  select(OwnGuns, Total.victims, Fatalities, Year)
-
-gun_deaths_by_year &lt;- gun_death_data|&gt;
+<pre class="r"><code>gun_deaths_by_year &lt;- gun_death_data|&gt;
   group_by(Year)|&gt;
   summarize(num_deaths = n())</code></pre>
 <pre class="r"><code>gun_plot &lt;- gun_deaths_by_year %&gt;%
