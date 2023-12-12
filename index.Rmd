@@ -136,14 +136,7 @@ While this correlation implies there is a statistically significant relationship
 ## Conclusion
 
 
-Overall, it appears there is statistically significant evidence for the hypothesis that increasing the gun ownership rate in the United States has a positive relationship with the number of mass shootings rising. A potential limitation to this study is the fact that the number of mass shootings could be underreported. 
+Overall, it appears there is statistically significant evidence for the hypothesis that increasing the gun ownership rate in the United States has a positive relationship with the number of mass shootings rising. A potential limitation to this study is the fact that the number of mass shootings could be underreported. In addition, a major confounding variable not accounted for in this study are gun control laws. As the United States has state-by-state policy on guns, the strict/lenient nature of a states' gun laws affects both the gun ownership rate and the number of mass shooting instances. This factor has the ability to affect both the response and explanatory variable. 
 
 
-
-In addition, a major confounding variable not accounted for in this study are gun control laws. As the United States has state-by-state policy on guns, the strict/lenient nature of a states' gun laws affects both the gun ownership rate and the number of mass shooting instances. This factor has the ability to affect both the response and explanatory variable. 
-
-
-If there was more time and financial resources to create this study, I would personally document the instances of mass shootings in order to ensure the number is accurate and there is no missing data. In addition, as this study only runs up to 2018, it would be interesting to see the trend in the years up to 2023, when mass shootings have significantly risen in the United States. 
-
-
-Lastly, it would be interesting to explore if the outcome variable was number of victims of gun violence (per year) rather than mass shooting instances. Instances of mass shootings (say 10 in 2018), conceals the magnitude of these incidents by the number of fatalities. With more time and resources, I would explore the impact of gun ownership rates on this variable. 
+If there was more time and financial resources to create this study, I would personally document the instances of mass shootings in order to ensure the number is accurate and there is no missing data. In addition, as this study only runs up to 2018, it would be interesting to see the trend in the years up to 2023, when mass shootings have significantly risen in the United States. Lastly, it would be interesting to explore if the outcome variable was number of victims of gun violence (per year) rather than mass shooting instances. Instances of mass shootings (say 10 in 2018), conceals the magnitude of these incidents by the number of fatalities. With more time and resources, I would explore the impact of gun ownership rates on this variable. 
