@@ -75,7 +75,9 @@ gun_ownership_data|>
   labs(title = "Gallup Gun Ownership Rate in the United States from 2000-2018", x = "Years", y = "Gun Ownership Rate(%)")
 ```
 
-Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances). The following graph displays a linegraph of the gun ownership rate and the number of mass shooting instances. The top line represents the gun ownership rate, which remained between 40% and 50% over this period, but increased overall. The bottom line represents the number of mass shooting instances documented by Mother Jones, which has increased over this period of time to nearly 10 documented instances per year.
+Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances)
+
+The following graph displays a linegraph of the gun ownership rate and the number of mass shooting instances. The top line represents the gun ownership rate, which remained between 40% and 50% over this period, but increased overall. The bottom line represents the number of mass shooting instances documented by Mother Jones, which has increased over this period of time to nearly 10 documented instances per year.
 
 ```{r, include= FALSE}
 merged_data_2 <- gun_deaths_by_year|>
