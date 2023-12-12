@@ -28,7 +28,7 @@ library(infer)
 library(dbplyr)
 
 gun_death_data <- read.csv("massshootings.csv")|>
-  filter(Year >= 2000 & Year <= 2017)
+  filter(Year >= 2000 & Year <= 2018)
 
 gun_ownership_data = read_csv("gunownership.csv")
 
@@ -46,7 +46,7 @@ gun_deaths_by_year <- gun_death_data|>
 gun_plot <- gun_deaths_by_year %>%
   ggplot(mapping = aes(x = Year, y = num_deaths)) +
   geom_bar(stat = "identity")+
-  labs(title = "Number of Mass Shootings from 1980 to 2017", x = "Year", y = "Number of Mass Shootings")
+  labs(title = "Number of Mass Shootings from 2000 to 2018", x = "Year", y = "Number of Mass Shootings")
 gun_plot
 ```
 
@@ -69,7 +69,6 @@ The following graph displays a linegraph of the gun ownership rate and the numbe
 ```{r}
 merged_data_2 <- gun_deaths_by_year|>
   inner_join(gun_ownership_data, by = "Year")
-merged_data_2
 ```
 
 ```{r}
