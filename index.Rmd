@@ -1,8 +1,10 @@
 ---
-title: "Final Project"
+title: "Gov 50 Final Project"
 author: "Austen Wyche"
-date: "2023-12-13"
-output: html_document
+description: "GOV 50 Final Project"
+output:
+  distill::distill_article:
+    self_contained: false
 ---
 
 ## Introduction
@@ -56,7 +58,8 @@ gun_ownership_data|>
   select(Year, OwnGuns)|>
   ggplot(mapping = aes(x = Year, y = OwnGuns))+
   geom_col()+
-  labs(title = "Gallup Gun Ownership Rate in the United States from 2000-2018", x = "Years", y = "Gun Ownership Rate(%)")
+  labs(title = "Gallup Gun Ownership Rate in the United States from 2000-2018", 
+       x = "Years", y = "Gun Ownership Rate(%)")
 ```
 
 Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances)
