@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Austen Wyche"
-description: "GOV 50 Final Project"
+description: "Gun Ownership and Mass Shootings"
 output:
   distill::distill_article:
     self_contained: false
@@ -59,7 +59,8 @@ gun_ownership_data|>
   ggplot(mapping = aes(x = Year, y = OwnGuns))+
   geom_col()+
   labs(title = "Gallup Gun Ownership Rate in the United States from 2000-2018", 
-       x = "Years", y = "Gun Ownership Rate(%)")
+       x = "Years", 
+       y = "Gun Ownership Rate(%)")
 ```
 
 Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances)
@@ -76,7 +77,9 @@ merged_information <- merged_data_2 |>
   ggplot(mapping = aes(x = Year))+
   geom_line(aes(y = num_deaths))+
   geom_line(aes(y = OwnGuns))+
-  labs(title = "Relationship between Gun Ownership Rate and Number of Mass Shootings", x = "Year", y = "Number of Mass Shootings/Percentage Gun Ownership")
+  labs(title = "Relationship between Gun Ownership Rate and Number of Mass Shootings", 
+       x = "Year", 
+       y = "Number of Mass Shootings/Percentage Gun Ownership")
 merged_information
 ```
 
