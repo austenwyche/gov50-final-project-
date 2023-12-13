@@ -1,9 +1,9 @@
 ---
 title: "Gov 50 Final Project"
 author: "M. Austen Wyche"
-output:
+output: 
   distill::distill_article: 
-    self_contained: false
+    self_contained: false 
     theme: cosmo
     toc: true
     toc_float: true
