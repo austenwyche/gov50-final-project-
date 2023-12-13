@@ -1,28 +1,33 @@
 ---
-title: "Gov 50 Final Project"
-author: "Austen Wyche"
-description: "Gun Ownership and Mass Shootings"
+title: "Gov 50 Final Project" 
+author: "M. Austen Wyche" 
+description: "12-13-2023"
 output:
-  distill::distill_article:
+  distill::distill_article: 
     self_contained: false
 ---
 
-## Introduction
+![**Gun Ownership in the United States (The New York Times)**](images/gunowner.jpeg)
 
-As the risk of gun violence against everyday Americans has become more common, there has been enhanced political discussion as to what are the factors that influence these incidents. In order to discover a commonsense solution that saves lives, it is imperative to analyze the factor of gun ownership in the United States. The United States stands out among it's peers in civilian guns per capita and among acts of gun violence. This begs the question: Is there an association between the two?
+# [Introduction]{.underline} {style="color: blue"}
 
-The main research question is: What is the relationship between gun ownership rates and the number of mass shootings (per year) in the United States? My main hypothesis is that with higher gun ownership, there will be a higher number of mass shootings taking place (I hypothesize there is a positive association between the explanatory and outcome variable). This is important to discover whether there is a correlation between allowing more people to own guns and more instances of violence. 
+### Background and Introduction {style="color: red"}
 
-In the United States, there is major debate over whether the gun ownership rate makes Americans safer or more vulnerable to danger. By analyzing the relationship between gun ownership and mass shootings, I hope to discover whether there is a relationship between the two. 
+As the risk of gun violence against everyday Americans has become more common, there has been enhanced political discussion as to what are the factors that influence these incidents. In order to discover a commonsense solution that saves lives, it is imperative to analyze the factor of gun ownership in the United States. The United States stands out among it\'s peers in civilian guns per capita and among acts of gun violence. This begs the question: *Is there an association between the two?*
 
+The main research question is: What is the relationship between gun ownership rates and the number of mass shootings (per year) in the United States? **My main [hypothesis]{.underline} is that with higher gun ownership, there will be a higher number of mass shootings taking place; hence, a positive association between the explanatory and outcome variables**. This is important to discover whether there is a correlation between allowing more people to own guns and more instances of violence.
 
-## Data Section
+In the United States, there is major debate over whether the gun ownership rate makes Americans safer or more vulnerable to danger. By analyzing the relationship between gun ownership and mass shootings, I hope to discover whether there is a relationship between these two very important issues.
 
-The main outcome of interest is the number of mass shootings in the United States per year. The outcome variable of interest is measured by Mother Jones, a nonprofit organization which compiled records of mass shootings in the United States since the year 2000. 
+# [Data Section]{.underline} {style="color: blue"}
 
-As we can see below, the number of mass shootings in the United States has increased in frequency over the last four decades. One limitation of this data is the fact that some acts of gun violence (i.e. when there are only two victims) are not classified as mass shootings despite the weapon being a firearm. In addition, it is possible Mother Jones has excluded some instances of mass shootings, resulting in a potential underreporting of the true number of instances. While this is a limitation of the data, the plot by Mother Jones data displays the number of mass shootings reported (defined as 3 or more killings in a single incident by United States statutes).
+### Outcome Variable (Number of Mass Shootings in the United States) {style="color: red"}
 
-The main outcome variable of interest is the number of mass shooting instances, which is seen in the graph below. As we can see, the number of mass shootings documented by Mother Jones has steadily increased in frequency from 2000 to 2018. 
+The main **outcome variable of interest** is the number of mass shootings in the United States per year. The outcome variable of interest is measured by Mother Jones, a nonprofit organization which compiled records of mass shootings in the United States since the year 2000.
+
+As we can see below, the number of mass shootings in the United States has **increased** in frequency over the last four decades. One **limitation** of this data is the fact that some acts of gun violence (i.e. when there are only two victims) are not classified as mass shootings despite the weapon being a firearm. According to United States statute, only incidents with **3 or more victims** are classified under "mass shootings."
+
+In addition, it is possible Mother Jones has excluded some instances of mass shootings, resulting in a potential **underreporting** of the true number of instances. The main outcome variable of interest is the number of mass shooting instances, which is seen in the graph below. As we can see, the number of mass shootings documented by Mother Jones has steadily increased in frequency from 2000 to 2018.
 
 ```{r}
 library(tidyverse)
@@ -49,7 +54,9 @@ gun_plot <- gun_deaths_by_year %>%
 gun_plot
 ```
 
-## Results Section
+# [Results Section]{.underline} {style="color: blue"}
+
+### Explanatory Variable (Gun Ownership Rate in the United States) {style="color: red"}
 
 As we can see below, Gallup has compiled the self-reported gun ownership rate in the United States between 2000-2018. It appears the gun ownership rate in the United States has remained relatively stable, but increased gradually, between 40% and 50% in the period of 2000-2018.
 
@@ -63,9 +70,9 @@ gun_ownership_data|>
        y = "Gun Ownership Rate(%)")
 ```
 
-Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances)
+### Main Relationship of Interest (Gun Ownership Rate and Number of Mass Shooting Instances) {style="color: red"}
 
-The following graph displays a linegraph of the gun ownership rate and the number of mass shooting instances. The top line represents the gun ownership rate, which remained between 40% and 50% over this period, but increased overall. The bottom line represents the number of mass shooting instances documented by Mother Jones, which has increased over this period of time to nearly 10 documented instances per year.
+The following graph displays a line graph of the gun ownership rate and the number of mass shooting instances. The top line represents the gun ownership rate, which remained between 40% and 50% over this period, but increased overall. The bottom line represents the number of mass shooting instances documented by Mother Jones, which has increased over this period of time to nearly 10 documented instances per year.
 
 ```{r}
 merged_data_2 <- gun_deaths_by_year|>
@@ -83,7 +90,7 @@ merged_information <- merged_data_2 |>
 merged_information
 ```
 
-Regression of Gun Ownership Rate and Instances of Mass Shootings 
+### Regression of Gun Ownership Rate and Instances of Mass Shootings {style="color: red"}
 
 ```{r, include= FALSE}
 library(modelsummary)
@@ -101,19 +108,12 @@ modelsummary::modelsummary(fit_1,
                            gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
 
+As we interpret this correlation, it appears that when the gun ownership rate is zero, the number of anticipated deaths is -34.96. This should **not** be interpreted in a causal manner as it is not possible to have a negative gun ownership rate or a negative number of deaths. Furthermore, the correlation displays that for every one unit (one percent) increase in the gun ownership rate, there appears to be a .8890 increase in the number of mass shooting instances. Due to this relationship, it is likely we can conclude the gun ownership rate in the United States has a **positive relationship** with the number of mass shooting instances.
 
+Due to the p value of OwnGuns (.003) being less than .05, we can reject the null hypothesis that there is no relationship between the gun ownership rate and the number of mass shooting instances in the United States. Therefore, there appears to be a **statistically significant relationship** between the two. While this correlation implies there is a statistically significant relationship between the gun ownership rate in the United States and the number of mass shootings, we should continue to acknowledge the number of mass shootings is likely higher than reported by Mother Jones.
 
+# [Conclusion]{.underline} {style="color: blue"}
 
-As we interpret this correlation, it appears that when the gun ownership rate is zero, the number of anticipated deaths is -34.96. This should not be interpreted in a causal manner as it is not possible to have a negative gun ownership rate or a negative number of deaths. Furthermore, the correlation displays that for every one unit (one percent) increase in the gun ownership rate, there appears to be a .8890 increase in the number of mass shooting instances. Due to this relationship, it is likely we can conclude the gun ownership rate in the United States has a positive relationship with the number of mass shooting instances. 
+Overall, it appears there is **statistically significant evidence** for the hypothesis that increasing the gun ownership rate in the United States has a positive relationship with the number of mass shootings rising. A potential limitation to this study is the fact that the number of mass shootings could be under-reported. In addition, a major confounding variable not accounted for in this study are **gun control laws**. As the United States has state-by-state policy on guns, the strict/lenient nature of a states' gun laws affects both the gun ownership rate and the number of mass shooting instances. This factor has the ability to affect both the **response and explanatory variable.**
 
-
-Due to the p value of OwnGuns (.003) being less than .05, we can reject the null hypothesis that there is no relationship between the gun ownership rate and the number of mass shooting instances in the United States. Therefore, there appears to be a statistically significant relationship between the two. While this correlation implies there is a statistically significant relationship between the gun ownership rate in the United States and the number of mass shootings, we should continue to acknowledge the number of mass shootings is likely higher than reported by Mother Jones. 
-
-
-## Conclusion
-
-
-Overall, it appears there is statistically significant evidence for the hypothesis that increasing the gun ownership rate in the United States has a positive relationship with the number of mass shootings rising. A potential limitation to this study is the fact that the number of mass shootings could be underreported. In addition, a major confounding variable not accounted for in this study are gun control laws. As the United States has state-by-state policy on guns, the strict/lenient nature of a states' gun laws affects both the gun ownership rate and the number of mass shooting instances. This factor has the ability to affect both the response and explanatory variable. 
-
-
-If there was more time and financial resources to create this study, I would personally document the instances of mass shootings in order to ensure the number is accurate and there is no missing data. In addition, as this study only runs up to 2018, it would be interesting to see the trend in the years up to 2023, when mass shootings have significantly risen in the United States. Lastly, it would be interesting to explore if the outcome variable was number of victims of gun violence (per year) rather than mass shooting instances. Instances of mass shootings (say 10 in 2018), conceals the magnitude of these incidents by the number of fatalities. With more time and resources, I would explore the impact of gun ownership rates on this variable. 
+If there was more time and financial resources to create this study, I would personally document the instances of mass shootings in order to ensure the number is accurate and there is no missing data. In addition, as this study only runs up to 2018, it would be interesting to see the trend in the years up to 2023, when mass shootings have significantly risen in the United States. Lastly, it would be interesting to explore if the outcome variable was **number of victims of gun violence (per year)** rather than mass shooting instances. Instances of mass shootings (say 10 in 2018), conceals the magnitude of these incidents by the number of fatalities. With more time and resources, I would explore the impact of gun ownership rates on this variable.
