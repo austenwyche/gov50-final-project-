@@ -1,6 +1,6 @@
 ---
-title: "Gov 50 Final Project" 
-author: "M. Austen Wyche" 
+title: "Gov 50 Final Project"
+author: "M. Austen Wyche"
 output:
   distill::distill_article: 
     self_contained: false
@@ -16,11 +16,11 @@ As the risk of gun violence against everyday Americans has become more common, t
 
 The main research question is: What is the relationship between gun ownership rates and the number of mass shootings (per year) in the United States? **My main [hypothesis]{.underline} is that with higher gun ownership, there will be a higher number of mass shootings taking place; hence, a positive association between the explanatory and outcome variables**. This is important to discover whether there is a correlation between allowing more people to own guns and more instances of violence.
 
-In the United States, there is major debate over whether the gun ownership rate makes Americans safer or more vulnerable to danger. By analyzing the relationship between gun ownership and mass shootings, I hope to discover whether there is a relationship between these two very important issues.
+In order to decrease the loss of innocent life, it is important to understand what is causing the harsh increase in mass shootings in the United States. Is it the gun culture in America? The high rate of gun ownership? Lack of mental health resources and investment? By embarking on this study, I hope to shed light on the potential contributing factors to gun violence.
 
 # [Data Section]{.underline} {style="color: blue"}
 
-### Outcome Variable (Number of Mass Shootings in the United States) {style="color: red"}
+### Outcome Variable (Number of Mass Shootings in the United States) & Loading Data {style="color: red"}
 
 The main **outcome variable of interest** is the number of mass shootings in the United States per year. The outcome variable of interest is measured by Mother Jones, a nonprofit organization which compiled records of mass shootings in the United States since the year 2000.
 
