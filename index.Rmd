@@ -49,12 +49,12 @@ In addition, it is possible Mother Jones has excluded some instances of mass sho
 ```{r}
 gun_deaths_by_year <- gun_death_data|>
   group_by(Year)|>
-  summarize(num_deaths = n())
+  summarize(num_ms = n())
 ```
 
 ```{r}
 gun_plot <- gun_deaths_by_year %>%
-  ggplot(mapping = aes(x = Year, y = num_deaths)) +
+  ggplot(mapping = aes(x = Year, y = num_ms)) +
   geom_bar(stat = "identity")+
   labs(title = "Number of Mass Shootings from 2000 to 2018",
        x = "Year",
@@ -92,7 +92,7 @@ The following graph displays a line graph of the gun ownership rate and the numb
 ```{r}
 merged_information <- merged_data_2 |>
   ggplot(mapping = aes(x = Year))+
-  geom_line(aes(y = num_deaths))+
+  geom_line(aes(y = num_ms))+
   geom_line(aes(y = OwnGuns))+
   labs(title = "Relationship between Gun Ownership Rate and Number of Mass Shootings", 
        x = "Year", 
@@ -108,7 +108,7 @@ library(tinytex)
 ```
 
 ```{r, echo=FALSE}
-fit_1 <- lm(data= merged_data_2, num_deaths ~ OwnGuns)
+fit_1 <- lm(data= merged_data_2, num_ms ~ OwnGuns)
 fit_1
 
 ## knitr::kable(fit_1, col.names = c("Term", "Estimate", "Standard Error", "P-Value"))
